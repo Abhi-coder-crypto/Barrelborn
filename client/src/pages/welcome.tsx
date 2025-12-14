@@ -59,8 +59,9 @@ export default function Welcome() {
       className="h-screen w-screen overflow-hidden relative" 
       style={{ 
         backgroundImage: `url(${bgPattern})`, 
-        backgroundRepeat: 'repeat', 
-        backgroundSize: '512px 512px'
+        backgroundRepeat: 'no-repeat', 
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     >
       {/* Media preloader */}
