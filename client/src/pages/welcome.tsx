@@ -56,7 +56,7 @@ export default function Welcome() {
 
   return (
     <div 
-      className="h-screen w-screen overflow-hidden relative flex items-center justify-center" 
+      className="h-screen w-screen overflow-hidden relative" 
       style={{ 
         backgroundImage: `url(${bgPattern})`, 
         backgroundRepeat: 'repeat', 
@@ -66,18 +66,19 @@ export default function Welcome() {
       {/* Media preloader */}
       <MediaPreloader onComplete={() => setMediaReady(true)} />
 
-      {/* Responsive background container */}
+      {/* Responsive background container - full width on mobile, centered on desktop */}
       <div
-        className="relative md:w-full md:mx-auto w-screen h-screen"
+        className="relative w-full h-full md:mx-auto"
         style={{
           backgroundColor: 'transparent',
           ...(screenDimensions.width > 768 ? {
             maxWidth: `${Math.min(420 * scaleFactor, screenDimensions.width * 0.95)}px`,
             height: `${containerHeight}px`,
             aspectRatio: '9/16',
+            margin: '0 auto',
           } : {
-            width: '100vw',
-            height: '100vh',
+            width: '100%',
+            height: '100%',
           })
         }}
       >
