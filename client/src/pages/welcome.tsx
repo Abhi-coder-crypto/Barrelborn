@@ -35,73 +35,73 @@ export default function Welcome() {
       <div className="flex flex-col items-center w-full px-4 pt-0 pb-2">
 
         {/* Logo Image - big and at top, negative margin to pull up */}
-        <div className="flex flex-col items-center w-full -mt-8">
+        <div className="flex flex-col items-center w-full -mt-6">
           <img
             src={logoImage}
             alt="Barrelborn Dine & Draft"
-            className="w-[420px] h-auto"
+            className="w-[380px] h-auto"
           />
         </div>
 
         {/* Social Media Icons - directly under logo, negative margin to compensate for logo whitespace */}
-        <div className="flex gap-4 -mt-16">
+        <div className="flex gap-3 -mt-14">
           <button
             onClick={() => handleSocialClick("https://www.instagram.com/mingschinesecuisine.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==")}
-            className="w-12 h-12 border rounded-md flex items-center justify-center transition-opacity hover:opacity-80"
+            className="w-11 h-11 border rounded-md flex items-center justify-center transition-opacity hover:opacity-80"
             style={{ borderColor: '#dcd4c8', backgroundColor: 'transparent' }}
           >
-            <SiInstagram className="w-6 h-6" style={{ color: '#dcd4c8' }} />
+            <SiInstagram className="w-5 h-5" style={{ color: '#dcd4c8' }} />
           </button>
           <button
             onClick={() => handleSocialClick("https://facebook.com")}
-            className="w-12 h-12 border rounded-md flex items-center justify-center transition-opacity hover:opacity-80"
+            className="w-11 h-11 border rounded-md flex items-center justify-center transition-opacity hover:opacity-80"
             style={{ borderColor: '#dcd4c8', backgroundColor: 'transparent' }}
           >
-            <SiFacebook className="w-6 h-6" style={{ color: '#dcd4c8' }} />
+            <SiFacebook className="w-5 h-5" style={{ color: '#dcd4c8' }} />
           </button>
           <button
             onClick={() => handleSocialClick("https://youtube.com")}
-            className="w-12 h-12 border rounded-md flex items-center justify-center transition-opacity hover:opacity-80"
+            className="w-11 h-11 border rounded-md flex items-center justify-center transition-opacity hover:opacity-80"
             style={{ borderColor: '#dcd4c8', backgroundColor: 'transparent' }}
           >
-            <SiYoutube className="w-6 h-6" style={{ color: '#dcd4c8' }} />
+            <SiYoutube className="w-5 h-5" style={{ color: '#dcd4c8' }} />
           </button>
         </div>
 
         {/* Explore Menu Button */}
         <button
           onClick={() => setLocation("/menu")}
-          className="mt-8 px-12 py-4 font-semibold border-2 rounded-full transition-colors flex items-center gap-3 text-lg"
+          className="mt-7 px-10 py-3 font-semibold border-2 rounded-full transition-colors flex items-center gap-2 text-base"
           style={{ borderColor: '#B8986A', color: '#dcd4c8', backgroundColor: 'transparent' }}
         >
-          <Utensils className="w-6 h-6" style={{ color: '#dcd4c8' }} />
+          <Utensils className="w-5 h-5" style={{ color: '#dcd4c8' }} />
           <span>EXPLORE OUR MENU</span>
         </button>
 
         {/* Rating Section */}
-        <div className="text-center mt-6">
-          <p className="font-medium text-lg mb-3" style={{ color: '#dcd4c8' }}>
+        <div className="text-center mt-5">
+          <p className="font-medium text-base mb-2" style={{ color: '#dcd4c8' }}>
             Click to Rate us on Google
           </p>
           <div
-            className="flex justify-center cursor-pointer gap-2"
+            className="flex justify-center cursor-pointer gap-1"
             onClick={() => window.open("https://g.page/r/CePLzPaLyBLNEAI/review")}
           >
             {[1, 2, 3, 4, 5].map((star) => (
-              <Star key={star} className="w-9 h-9" style={{ color: '#B8986A', fill: '#B8986A' }} />
+              <Star key={star} className="w-8 h-8" style={{ color: '#B8986A', fill: '#B8986A' }} />
             ))}
           </div>
         </div>
 
         {/* Address Section */}
-        <div className="text-center mt-6">
+        <div className="text-center mt-5">
           <div
-            className="border-2 rounded-full inline-block px-6 py-1.5 mb-3"
+            className="border-2 rounded-full inline-block px-5 py-1 mb-2"
             style={{ borderColor: '#B8986A' }}
           >
-            <span className="font-semibold text-base" style={{ color: '#dcd4c8' }}>ADDRESS</span>
+            <span className="font-semibold text-sm" style={{ color: '#dcd4c8' }}>ADDRESS</span>
           </div>
-          <div className="leading-relaxed text-base" style={{ color: '#E8DFD1' }}>
+          <div className="leading-snug text-sm" style={{ color: '#E8DFD1' }}>
             <p>Shop No: 3, Madanlal Dhingra Rd,</p>
             <p>beside Satranj Wafers, Bhakti Mandir,</p>
             <p>Panch Pakhdi, Thane West</p>
@@ -109,14 +109,14 @@ export default function Welcome() {
         </div>
 
         {/* Contact Section */}
-        <div className="text-center mt-5">
+        <div className="text-center mt-4">
           <div
-            className="border-2 rounded-full inline-block px-6 py-1.5 mb-3"
+            className="border-2 rounded-full inline-block px-5 py-1 mb-2"
             style={{ borderColor: '#B8986A' }}
           >
-            <span className="font-semibold text-base" style={{ color: '#dcd4c8' }}>CONTACT</span>
+            <span className="font-semibold text-sm" style={{ color: '#dcd4c8' }}>CONTACT</span>
           </div>
-          <div className="text-base" style={{ color: '#E8DFD1' }}>
+          <div className="text-sm" style={{ color: '#E8DFD1' }}>
             <p>+91 1234567890</p>
             <p>info@barrelborn.in</p>
           </div>
@@ -124,7 +124,7 @@ export default function Welcome() {
 
         {/* Website URL */}
         <p
-          className="mt-5 cursor-pointer text-base"
+          className="mt-4 cursor-pointer text-sm"
           style={{ color: '#B8986A' }}
           onClick={() => window.open("https://www.barrelborn.in", "_blank")}
         >
@@ -132,7 +132,7 @@ export default function Welcome() {
         </p>
 
         {/* Developer Credit */}
-        <div className="text-center mt-4 mb-4 text-sm" style={{ color: '#E8DFD1' }}>
+        <div className="text-center mt-3 mb-4 text-xs" style={{ color: '#E8DFD1' }}>
           <p>Developed By</p>
           <p
             className="font-medium cursor-pointer"
