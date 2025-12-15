@@ -16,6 +16,7 @@ import premiumFoodImg from "@assets/generated_images/premium_burger_dark_backgro
 import premiumBarImg from "@assets/stock_images/premium_whisky_cockt_68b3295e.jpg";
 import premiumDessertsImg from "@assets/generated_images/chocolate_dessert_dark_background.png";
 import premiumMocktailsImg from "@assets/stock_images/premium_colorful_moc_1a15dee9.jpg";
+import logoImg from "/images/logo.png";
 
 const promotionalImages = [
   { id: 1, src: restaurantInterior1, alt: "Elegant Restaurant Interior" },
@@ -66,18 +67,13 @@ export default function MenuLanding() {
               </Button>
             </div>
 
-            <div className="absolute left-1/2 transform -translate-x-1/2 text-center">
-              <h1
-                className="font-bold"
-                style={{
-                  fontSize: "clamp(18px, 4vw, 28px)",
-                  color: "#DCD4C8",
-                  fontFamily: "'Playfair Display', serif",
-                  letterSpacing: "1px",
-                }}
-              >
-                BARRELBORN
-              </h1>
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+              <img 
+                src={logoImg} 
+                alt="Barrel Born Logo" 
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+                data-testid="img-logo"
+              />
             </div>
 
             <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-3 flex-shrink-0">
@@ -210,7 +206,7 @@ export default function MenuLanding() {
       </header>
 
       <div className="container mx-auto px-3 sm:px-4 py-4">
-        <div className="relative h-40 sm:h-48 md:h-56 rounded-xl overflow-hidden mb-6">
+        <div className="relative h-56 sm:h-64 md:h-72 rounded-xl overflow-hidden mb-6">
           {promotionalImages.map((image, index) => (
             <motion.div
               key={image.id}
