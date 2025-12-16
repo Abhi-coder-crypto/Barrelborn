@@ -46,7 +46,7 @@ export default function Welcome() {
         {/* Social Media Icons - directly under logo, negative margin to compensate for logo whitespace */}
         <div className="flex gap-3 -mt-14">
           <button
-            onClick={() => handleSocialClick("https://www.instagram.com/mingschinesecuisine.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==")}
+            onClick={() => handleSocialClick("https://www.instagram.com/barrelborn_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==")}
             className="w-11 h-11 border rounded-md flex items-center justify-center transition-opacity hover:opacity-80"
             style={{ borderColor: '#dcd4c8', backgroundColor: 'transparent' }}
           >
@@ -85,7 +85,7 @@ export default function Welcome() {
           </p>
           <div
             className="flex justify-center cursor-pointer gap-1"
-            onClick={() => window.open("https://g.page/r/CePLzPaLyBLNEAI/review")}
+            onClick={() => window.open("https://share.google/4M6YuMlZc0hDBswBu")}
           >
             {[1, 2, 3, 4, 5].map((star) => (
               <Star key={star} className="w-8 h-8" style={{ color: '#B8986A', fill: '#B8986A' }} />

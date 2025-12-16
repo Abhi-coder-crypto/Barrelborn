@@ -8,7 +8,7 @@ interface QuickStarRatingProps {
 export default function QuickStarRating({ className = "" }: QuickStarRatingProps) {
   const handleFiveStarRating = () => {
     // Direct Google review link as requested by user
-    const googleReviewUrl = "https://www.google.com/search?sca_esv=827ca067cae54b45&sxsrf=AE3TifPoaq7_7KVmaIPPl7WeQGwaAE9fqw:1755081423701&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E5hjw2IezP_Bw3k_5rJeegZLUiDytyxIWp-4-ROn9bNJsQIZRow8EYRYRoeYE65h-v896ClcNr_EJ9DJAT8e-F7HGNkWdkTzWU8S7X92urJefrzAzQ%3D%3D&q=Ming%27s+Chinese+Cuisine+Reviews&sa=X&ved=2ahUKEwjM6b7my4ePAxUyyjgGHdWsPfkQ0bkNegQIIhAD&biw=1470&bih=832&dpr=2";
+    const googleReviewUrl = "https://share.google/4M6YuMlZc0hDBswBu";
     window.open(googleReviewUrl, "_blank", "noopener,noreferrer");
   };
 

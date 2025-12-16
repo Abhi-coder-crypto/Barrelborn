@@ -252,11 +252,11 @@ export default function CategorySelection() {
                     <FaInstagram className="h-5 w-5 text-gray-600" />
                     <div>
                       <button
-                        onClick={() => window.open("https://instagram.com/barrelborn", "_blank", "noopener,noreferrer")}
+                        onClick={() => window.open("https://www.instagram.com/barrelborn_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", "_blank", "noopener,noreferrer")}
                         className="font-semibold text-blue-600 hover:underline"
                         style={{ fontFamily: "'Lato', sans-serif" }}
                       >
-                        @barrelborn
+                        @barrelborn_
                       </button>
                       <p className="text-sm text-gray-600" style={{ fontFamily: "'Lato', sans-serif" }}>
                         Follow us for updates
