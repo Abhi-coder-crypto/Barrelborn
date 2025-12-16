@@ -12,7 +12,7 @@ import restaurantInterior3 from "@assets/stock_images/elegant_restaurant_i_46bc3
 import gourmetFood1 from "@assets/stock_images/gourmet_food_plating_4fa14995.jpg";
 import gourmetFood2 from "@assets/stock_images/gourmet_food_plating_6ae9981b.jpg";
 
-import premiumFoodImg from "@assets/generated_images/premium_burger_dark_background.png";
+import premiumFoodImg from "@assets/image_1765866040643.png";
 import premiumBarImg from "@assets/stock_images/premium_whisky_cockt_68b3295e.jpg";
 import premiumDessertsImg from "@assets/generated_images/chocolate_dessert_dark_background.png";
 import premiumMocktailsImg from "@assets/stock_images/premium_colorful_moc_1a15dee9.jpg";
