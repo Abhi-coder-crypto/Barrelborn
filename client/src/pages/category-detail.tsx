@@ -46,8 +46,8 @@ import roseWinesImg from "@assets/image_1765864363438.png";
 import redWinesImg from "@assets/image_1765864393053.png";
 import dessertWinesImg from "@assets/image_1765864417149.png";
 import portWineImg from "@assets/image_1765864441224.png";
-import signatureMocktailsImg from "@assets/generated_images/signature_mocktails_drinks.png";
-import softBeveragesImg from "@assets/generated_images/soft_beverages_drinks.png";
+import signatureMocktailsImg from "@assets/image_1765865243299.png";
+import softBeveragesImg from "@assets/image_1765865174044.png";
 
 interface ISpeechRecognitionEvent {
   results: SpeechRecognitionResultList;

@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { getMainCategory, mainCategories } from "@/lib/menu-categories";
 
 import logoImg from "@assets/Untitled_design_(20)_1765720426678.png";
-import signatureMocktailsImg from "@assets/generated_images/signature_mocktails_drinks.png";
-import softBeveragesImg from "@assets/generated_images/soft_beverages_drinks.png";
+import signatureMocktailsImg from "@assets/image_1765865243299.png";
+import softBeveragesImg from "@assets/image_1765865174044.png";
 
 import blendedWhiskyImg from "@assets/image_1765863859085.png";
 import blendedScotchWhiskyImg from "@assets/image_1765863885349.png";
