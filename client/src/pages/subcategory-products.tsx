@@ -51,8 +51,29 @@ export default function SubcategoryProducts() {
   const [speechRecognition, setSpeechRecognition] = useState<ISpeechRecognition | null>(null);
   const [voiceSearchSupported, setVoiceSearchSupported] = useState(false);
 
+  // Map subcategories to MongoDB collections that actually contain data
+  const collectionMap: Record<string, string> = {
+    'soups': 'soups', 'nibbles': 'soups', 'titbits': 'soups', 'salads': 'soups',
+    'starters': 'vegstarter', 'charcoal': 'charcoal', 'pasta': 'pasta',
+    'pizza': 'pizza', 'sliders': 'sliders', 'entree': 'entree',
+    'bao-dimsum': 'momos', 'curries': 'gravies', 'biryani': 'potrice',
+    'rice': 'rice', 'dals': 'gravies', 'breads': 'entree',
+    'asian-mains': 'noodle', 'thai-bowls': 'thai', 'rice-noodles': 'noodle',
+    'sizzlers': 'charcoal', 'desserts': 'desserts',
+    'blended-whisky': 'beverages', 'vodka': 'beverages', 'gin': 'beverages',
+    'sparkling-wine': 'beverages', 'signature-mocktails': 'beverages',
+    'soft-beverages': 'beverages',
+  };
+  
+  const mongoCollection = collectionMap[subcategoryId] || 'soups';
+  
   const itemsQuery = useQuery<MenuItem[]>({
-    queryKey: ["/api/menu-items"],
+    queryKey: ["/api/menu-items/category", mongoCollection],
+    queryFn: async () => {
+      const response = await fetch(`/api/menu-items/category/${mongoCollection}`);
+      if (!response.ok) throw new Error('Failed to fetch');
+      return response.json();
+    }
   });
   
   const { data: menuItems = [], isLoading, error, isError } = itemsQuery;
@@ -111,21 +132,8 @@ export default function SubcategoryProducts() {
       filteringBy: dbCategory,
     });
     
-    let filtered = menuItems.filter((item) => {
-      const matchesCategory = item.category === dbCategory;
-      return matchesCategory;
-    });
-    
-    console.log("FILTER RESULT:", {
-      filteredCount: filtered.length,
-      filtered: filtered.map(item => ({ name: item.name, category: item.category }))
-    });
-    
-    // FALLBACK: If no items match this category, show all items
-    if (filtered.length === 0 && menuItems.length > 0) {
-      console.log("NO ITEMS FOUND FOR CATEGORY, SHOWING ALL ITEMS AS FALLBACK");
-      filtered = menuItems;
-    }
+    // Items are already from the specific MongoDB collection, no filtering needed
+    const filtered = menuItems;
     
     if (searchQuery.trim()) {
       const searched = filtered.filter(item =>

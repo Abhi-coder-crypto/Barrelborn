@@ -128,10 +128,20 @@ var MongoStorage = class {
   async getMenuItems() {
     try {
       const allMenuItems = [];
+      const collectionStats = [];
       for (const [category, collection] of this.categoryCollections) {
         const items = await collection.find({}).toArray();
+        const itemNames = items.map((item) => item.name || "NO NAME");
+        console.log(`[MongoDB] Collection "${category}": ${items.length} items`);
+        if (items.length > 0) {
+          console.log(`  Items: ${itemNames.slice(0, 3).join(", ")}${items.length > 3 ? "..." : ""}`);
+          console.log(`  Sample item: ${JSON.stringify(items[0]).substring(0, 200)}`);
+        }
+        collectionStats.push({ category, count: items.length, items: itemNames });
         allMenuItems.push(...items);
       }
+      console.log(`[MongoDB] TOTAL: ${allMenuItems.length} items across ${this.categoryCollections.size} collections`);
+      console.log("[MongoDB] Collections summary:", collectionStats);
       return this.sortMenuItems(allMenuItems);
     } catch (error) {
       console.error("Error getting menu items:", error);
