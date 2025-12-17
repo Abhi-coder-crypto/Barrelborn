@@ -8,7 +8,7 @@ async function connectToDatabase() {
   }
 
   const mongoUri = process.env.MONGODB_URI;
-  console.log('MongoDB URI exists:', !!mongoUri);
+  console.log('[API] MongoDB URI exists:', !!mongoUri);
   
   if (!mongoUri) {
     throw new Error('MONGODB_URI environment variable is not set');
@@ -35,32 +35,23 @@ export default async function handler(req, res) {
   }
 
   try {
+    const { category } = req.query;
+    console.log('[API] Fetching category:', category);
+
+    if (!category) {
+      return res.status(400).json({ error: 'Category parameter is required' });
+    }
+
     const client = await connectToDatabase();
     const db = client.db('barrelborn');
-    
-    // Actual MongoDB collections from barrelborn database
-    const categories = [
-      'blended-whisky', 'tequila', 'biryani', 'pizza', 'liqueurs', 'cognac-brandy',
-      'charcoal', 'thai-bowls', 'rum', 'sizzlers', 'breads', 'white-wines',
-      'rose-wines', 'dessert-wines', 'soft-beverages', 'port-wine', 'soups',
-      'rice-noodles', 'pasta', 'bao-dimsum', 'starters', 'blended-scotch-whisky',
-      'titbits', 'signature-mocktails', 'american-irish-whiskey', 'dals', 'vodka',
-      'gin', 'entree', 'single-malt-whisky', 'nibbles', 'salads', 'sparkling-wine',
-      'asian-mains', 'red-wines', 'curries', 'rice', 'sliders'
-    ];
-    
-    const allMenuItems = [];
-    for (const category of categories) {
-      const collection = db.collection(category);
-      const items = await collection.find({}).toArray();
-      allMenuItems.push(...items);
-    }
-    
-    console.log(`Found ${allMenuItems.length} total menu items across all categories`);
-    
-    res.status(200).json(allMenuItems);
+    const collection = db.collection(category);
+
+    const items = await collection.find({}).toArray();
+    console.log(`[API] Found ${items.length} items in category "${category}"`);
+
+    res.status(200).json(items);
   } catch (error) {
-    console.error('Error fetching menu items:', error);
+    console.error('[API] Error fetching items by category:', error);
     res.status(500).json({ 
       error: 'Failed to fetch menu items',
       message: error.message
