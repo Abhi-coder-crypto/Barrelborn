@@ -37,14 +37,25 @@ export default async function handler(req, res) {
   try {
     const client = await connectToDatabase();
     const db = client.db('barrelborn');
-    const collection = db.collection('menuItems');
     
-    console.log('Connected to MongoDB, querying menuItems collection');
+    const categories = [
+      'soups', 'vegstarter', 'chickenstarter', 'prawnsstarter',
+      'seafood', 'springrolls', 'momos', 'gravies',
+      'potrice', 'rice', 'ricewithgravy', 'noodle',
+      'noodlewithgravy', 'thai', 'chopsuey', 'desserts',
+      'beverages', 'extra'
+    ];
     
-    const menuItems = await collection.find({}).toArray();
-    console.log(`Found ${menuItems.length} menu items`);
+    const allMenuItems = [];
+    for (const category of categories) {
+      const collection = db.collection(category);
+      const items = await collection.find({}).toArray();
+      allMenuItems.push(...items);
+    }
     
-    res.status(200).json(menuItems);
+    console.log(`Found ${allMenuItems.length} total menu items across all categories`);
+    
+    res.status(200).json(allMenuItems);
   } catch (error) {
     console.error('Error fetching menu items:', error);
     res.status(500).json({ 
