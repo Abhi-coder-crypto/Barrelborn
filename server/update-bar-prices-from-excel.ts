@@ -81,25 +81,10 @@ function parseBarMenu(data: any[][]): ExcelItem[] {
 function formatPriceString(priceString: string, priceFormat: string): string {
   const prices = priceString.split('|').map(p => p.trim());
   
-  // Determine format labels based on price format
-  let labels: string[] = [];
-  
-  if (priceFormat.includes('30ml') && priceFormat.includes('Nip') && priceFormat.includes('Bottle')) {
-    labels = ['30ml', 'Nip', 'Bottle'];
-  } else if (priceFormat.includes('By Glass') && priceFormat.includes('Bottle')) {
-    labels = ['Glass', 'Bottle'];
-  } else if (prices.length === 3) {
-    labels = ['30ml', 'Nip', 'Bottle'];
-  } else if (prices.length === 2) {
-    labels = ['Glass', 'Bottle'];
-  } else if (prices.length === 1) {
-    return prices[0]; // Single price, return as-is
-  }
-  
-  // Build formatted price string
+  // Just return the prices with rupee symbol, no labels (labels are in subtext)
   const formattedParts: string[] = [];
-  for (let i = 0; i < prices.length && i < labels.length; i++) {
-    formattedParts.push(`${labels[i]}: ₹${prices[i]}`);
+  for (const price of prices) {
+    formattedParts.push(`₹${price}`);
   }
   
   return formattedParts.join(' / ');
