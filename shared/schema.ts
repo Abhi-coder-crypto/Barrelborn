@@ -6,7 +6,7 @@ export interface MenuItem {
   _id: ObjectId;
   name: string;
   description: string;
-  price: number;
+  price: number | string;  // String for bar items with multi-price format (e.g., "30ml: ₹200 / NIP: ₹400 / Bottle: ₹2000")
   category: string;
   isVeg: boolean;
   image: string;
@@ -37,7 +37,7 @@ export interface User {
 export const insertMenuItemSchema = z.object({
   name: z.string().min(1),
   description: z.string().min(1),
-  price: z.number().positive(),
+  price: z.union([z.number().positive(), z.string().min(1)]),  // Support both number and string prices
   category: z.string().min(1),
   isVeg: z.boolean(),
   image: z.string().url(),

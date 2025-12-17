@@ -486,7 +486,8 @@ import { z } from "zod";
 var insertMenuItemSchema = z.object({
   name: z.string().min(1),
   description: z.string().min(1),
-  price: z.number().positive(),
+  price: z.union([z.number().positive(), z.string().min(1)]),
+  // Support both number and string prices
   category: z.string().min(1),
   isVeg: z.boolean(),
   image: z.string().url(),
