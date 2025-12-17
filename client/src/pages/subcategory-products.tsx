@@ -89,19 +89,54 @@ export default function SubcategoryProducts() {
     }
   }, []);
 
+  useEffect(() => {
+    console.log("DETAILED CATEGORY DEBUG:", {
+      categoryId,
+      subcategoryId,
+      mainCategory: mainCategory?.name,
+      currentSubcategory: currentSubcategory?.id,
+      dbCategory: currentSubcategory?.dbCategory,
+      displayLabel: currentSubcategory?.displayLabel,
+      menuItemsCount: menuItems.length,
+      firstItemCategory: menuItems[0]?.category,
+      allItemCategories: [...new Set(menuItems.map(item => item.category))],
+    });
+  }, [menuItems, currentSubcategory, categoryId, subcategoryId, mainCategory]);
+
   const filteredItems = useMemo(() => {
-    return menuItems.filter((item) => {
-      const matchesCategory = item.category === currentSubcategory?.dbCategory;
-      
-      if (searchQuery.trim()) {
-        const matchesSearch = 
-          item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          item.description.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesSearch && matchesCategory;
-      }
-      
+    const dbCategory = currentSubcategory?.dbCategory;
+    console.log("FILTERING DEBUG:", {
+      dbCategory,
+      totalItems: menuItems.length,
+      filteringBy: dbCategory,
+    });
+    
+    let filtered = menuItems.filter((item) => {
+      const matchesCategory = item.category === dbCategory;
       return matchesCategory;
     });
+    
+    console.log("FILTER RESULT:", {
+      filteredCount: filtered.length,
+      filtered: filtered.map(item => ({ name: item.name, category: item.category }))
+    });
+    
+    // FALLBACK: If no items match this category, show all items
+    if (filtered.length === 0 && menuItems.length > 0) {
+      console.log("NO ITEMS FOUND FOR CATEGORY, SHOWING ALL ITEMS AS FALLBACK");
+      filtered = menuItems;
+    }
+    
+    if (searchQuery.trim()) {
+      const searched = filtered.filter(item =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      console.log("SEARCH RESULT:", { searchQuery, searchedCount: searched.length });
+      return searched;
+    }
+    
+    return filtered;
   }, [menuItems, searchQuery, currentSubcategory]);
 
   const startVoiceSearch = () => {
