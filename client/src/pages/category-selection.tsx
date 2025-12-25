@@ -306,12 +306,12 @@ export default function CategorySelection() {
 
           {categoryId === "food" && (
             <div 
-              className="absolute right-0 inline-flex rounded-full p-0.5 items-center gap-0.5"
+              className="absolute right-0 inline-flex rounded-full p-0.5 items-center gap-0"
               style={{ backgroundColor: "rgba(201, 165, 92, 0.15)", border: "1px solid #C9A55C" }}
             >
               <button
                 onClick={() => handleFilterChange("all")}
-                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                className="px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
                 data-testid="filter-all"
                 style={
                   vegFilter === "all"
@@ -323,7 +323,7 @@ export default function CategorySelection() {
               </button>
               <button
                 onClick={() => handleFilterChange("veg")}
-                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                className="px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
                 data-testid="filter-veg"
                 style={
                   vegFilter === "veg"
@@ -335,7 +335,7 @@ export default function CategorySelection() {
               </button>
               <button
                 onClick={() => handleFilterChange("non-veg")}
-                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                className="px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
                 data-testid="filter-non-veg"
                 style={
                   vegFilter === "non-veg"
