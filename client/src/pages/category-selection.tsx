@@ -94,7 +94,17 @@ export default function CategorySelection() {
   const params = useParams<{ category: string }>();
   const categoryId = params.category || "mocktails";
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
-  const [vegFilter, setVegFilter] = useState<"all" | "veg" | "non-veg">("all");
+  const [vegFilter, setVegFilter] = useState<"all" | "veg" | "non-veg">(() => {
+    if (categoryId === "food") {
+      try {
+        const saved = localStorage.getItem("foodVegFilter");
+        return (saved as "all" | "veg" | "non-veg") || "all";
+      } catch {
+        return "all";
+      }
+    }
+    return "all";
+  });
 
   const mainCategory = getMainCategory(categoryId);
   const subcategories = mainCategory?.subcategories || [];
@@ -102,6 +112,15 @@ export default function CategorySelection() {
   const handleSubcategoryClick = (subcategoryId: string) => {
     const filterParam = vegFilter !== "all" ? `?filter=${vegFilter}` : "";
     setLocation(`/menu/${categoryId}/${subcategoryId}${filterParam}`);
+  };
+
+  const handleFilterChange = (newFilter: "all" | "veg" | "non-veg") => {
+    setVegFilter(newFilter);
+    try {
+      localStorage.setItem("foodVegFilter", newFilter);
+    } catch {
+      // localStorage might not be available in some environments
+    }
   };
 
   const handleCategoryClick = (catId: string) => {
@@ -287,7 +306,7 @@ export default function CategorySelection() {
         {categoryId === "food" && (
           <div className="mb-6 flex gap-2 justify-center">
             <Button
-              onClick={() => setVegFilter("all")}
+              onClick={() => handleFilterChange("all")}
               variant={vegFilter === "all" ? "default" : "outline"}
               className="px-4 text-sm"
               data-testid="filter-all"
@@ -296,7 +315,7 @@ export default function CategorySelection() {
               All
             </Button>
             <Button
-              onClick={() => setVegFilter("veg")}
+              onClick={() => handleFilterChange("veg")}
               variant={vegFilter === "veg" ? "default" : "outline"}
               className="px-4 text-sm"
               data-testid="filter-veg"
@@ -305,7 +324,7 @@ export default function CategorySelection() {
               Veg
             </Button>
             <Button
-              onClick={() => setVegFilter("non-veg")}
+              onClick={() => handleFilterChange("non-veg")}
               variant={vegFilter === "non-veg" ? "default" : "outline"}
               className="px-4 text-sm"
               data-testid="filter-non-veg"

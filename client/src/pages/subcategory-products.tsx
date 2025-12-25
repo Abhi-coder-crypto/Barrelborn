@@ -42,9 +42,20 @@ export default function SubcategoryProducts() {
   const categoryId = params.category || "mocktails";
   const subcategoryId = params.subcategory || "";
 
-  // Get filter from URL params
+  // Get filter from URL params, fallback to localStorage
   const searchParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
-  const urlFilter = (searchParams.get('filter') || "all") as "all" | "veg" | "non-veg";
+  const getInitialFilter = () => {
+    const urlFilter = searchParams.get('filter');
+    if (urlFilter) {
+      return urlFilter as "all" | "veg" | "non-veg";
+    }
+    try {
+      const saved = localStorage.getItem("foodVegFilter");
+      return (saved as "all" | "veg" | "non-veg") || "all";
+    } catch {
+      return "all";
+    }
+  };
 
   const mainCategory = getMainCategory(categoryId);
   const subcategories = mainCategory?.subcategories || [];
@@ -54,7 +65,7 @@ export default function SubcategoryProducts() {
   const [isListening, setIsListening] = useState(false);
   const [speechRecognition, setSpeechRecognition] = useState<ISpeechRecognition | null>(null);
   const [voiceSearchSupported, setVoiceSearchSupported] = useState(false);
-  const [vegFilter, setVegFilter] = useState<"all" | "veg" | "non-veg">(urlFilter);
+  const [vegFilter, setVegFilter] = useState<"all" | "veg" | "non-veg">(getInitialFilter);
 
   const itemsQuery = useQuery<MenuItem[]>({
     queryKey: ["/api/menu-items", subcategoryId],
