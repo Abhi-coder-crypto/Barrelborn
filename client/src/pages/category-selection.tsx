@@ -306,41 +306,41 @@ export default function CategorySelection() {
 
           {categoryId === "food" && (
             <div 
-              className="absolute right-0 inline-flex rounded-full p-0 items-center"
+              className="absolute right-0 inline-flex rounded-full p-0.5 items-center gap-0.5"
               style={{ backgroundColor: "rgba(201, 165, 92, 0.15)", border: "1px solid #C9A55C" }}
             >
               <button
                 onClick={() => handleFilterChange("all")}
-                className="px-1.5 py-0.5 text-2xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
                 data-testid="filter-all"
                 style={
                   vegFilter === "all"
-                    ? { backgroundColor: "#C9A55C", color: "white", fontSize: "10px", lineHeight: "1" }
-                    : { color: "#C9A55C", fontSize: "10px", lineHeight: "1" }
+                    ? { backgroundColor: "white", color: "black", fontSize: "12px", lineHeight: "1.2" }
+                    : { color: "#C9A55C", fontSize: "12px", lineHeight: "1.2" }
                 }
               >
                 All
               </button>
               <button
                 onClick={() => handleFilterChange("veg")}
-                className="px-1.5 py-0.5 text-2xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
                 data-testid="filter-veg"
                 style={
                   vegFilter === "veg"
-                    ? { backgroundColor: "#C9A55C", color: "white", fontSize: "10px", lineHeight: "1" }
-                    : { color: "#C9A55C", fontSize: "10px", lineHeight: "1" }
+                    ? { backgroundColor: "#22C55E", color: "white", fontSize: "12px", lineHeight: "1.2" }
+                    : { color: "#C9A55C", fontSize: "12px", lineHeight: "1.2" }
                 }
               >
                 Veg
               </button>
               <button
                 onClick={() => handleFilterChange("non-veg")}
-                className="px-1.5 py-0.5 text-2xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
                 data-testid="filter-non-veg"
                 style={
                   vegFilter === "non-veg"
-                    ? { backgroundColor: "#C9A55C", color: "white", fontSize: "10px", lineHeight: "1" }
-                    : { color: "#C9A55C", fontSize: "10px", lineHeight: "1" }
+                    ? { backgroundColor: "#EF4444", color: "white", fontSize: "12px", lineHeight: "1.2" }
+                    : { color: "#C9A55C", fontSize: "12px", lineHeight: "1.2" }
                 }
               >
                 Non-Veg
