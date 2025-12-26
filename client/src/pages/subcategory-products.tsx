@@ -276,7 +276,7 @@ export default function SubcategoryProducts() {
                       <Button 
                         variant="ghost" 
                         size="sm" 
-                        className="h-9 px-2 hover:bg-transparent text-[#C9A55C] text-[10px] flex items-center gap-1"
+                        className="h-9 px-2 hover:bg-transparent text-[#C9A55C] hover:text-white text-[10px] flex items-center gap-1"
                       >
                         <span className="capitalize">{vegFilter}</span>
                         <ChevronDown className="h-3 w-3" />
