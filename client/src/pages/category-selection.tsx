@@ -133,6 +133,8 @@ export default function CategorySelection() {
   const mainCategory = getMainCategory(categoryId);
   const subcategories = mainCategory?.subcategories || [];
 
+  const [vegFilter, setVegFilter] = useState<"all" | "veg" | "non-veg">("all");
+
   const { data: allMenuItems = [], isLoading: isLoadingItems } = useQuery<MenuItem[]>({
     queryKey: ["/api/menu-items"],
     enabled: categoryId === "food" || categoryId === "bar"
@@ -151,12 +153,16 @@ export default function CategorySelection() {
         ? ["nibbles", "titbits", "soups", "salads", "starters", "charcoal", "pasta", "pizza", "sliders", "entree", "bao-dimsum", "curries", "biryani", "rice", "dals", "breads", "asian-mains", "thai-bowls", "rice-noodles", "sizzlers", "desserts"].includes(itemCategory)
         : ["blended-whisky", "blended-scotch-whisky", "american-irish-whiskey", "single-malt-whisky", "vodka", "gin", "rum", "tequila", "cognac-brandy", "liqueurs", "sparkling-wine", "white-wines", "rose-wines", "red-wines", "dessert-wines", "port-wine", "signature-mocktails", "soft-beverages"].includes(itemCategory);
       
-      return isCorrectCategory && (
-        item.name.toLowerCase().includes(query) || 
-        item.description.toLowerCase().includes(query)
-      );
+      const matchesSearch = item.name.toLowerCase().includes(query) || 
+                          item.description.toLowerCase().includes(query);
+      
+      const matchesVeg = vegFilter === "all" || 
+                        (vegFilter === "veg" && item.isVeg) || 
+                        (vegFilter === "non-veg" && !item.isVeg);
+
+      return isCorrectCategory && matchesSearch && matchesVeg;
     });
-  }, [allMenuItems, foodSearchQuery, categoryId]);
+  }, [allMenuItems, foodSearchQuery, categoryId, vegFilter]);
 
   const filteredSubcategories = useMemo(() => {
     return subcategories;
@@ -386,28 +392,77 @@ export default function CategorySelection() {
               placeholder={`Search ${categoryId} items...`}
               value={foodSearchQuery}
               onChange={(e) => setFoodSearchQuery(e.target.value)}
-              className="pl-10 pr-12 h-10 rounded-full border-2 text-white placeholder:text-white/60 focus-visible:ring-2 focus-visible:ring-[#C9A55C]/50"
+              className="pl-10 pr-32 sm:pr-40 h-11 rounded-full border-2 text-white placeholder:text-white/60 focus-visible:ring-2 focus-visible:ring-[#C9A55C]/50"
               style={{ 
                 borderColor: '#C9A55C', 
                 backgroundColor: 'transparent'
               }}
               data-testid={`input-${categoryId}-search`}
             />
-            {voiceSearchSupported && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={isListening ? undefined : startVoiceSearch}
-                className="absolute right-1 top-1/2 transform -translate-y-1/2 h-9 w-9 hover:bg-transparent"
-                data-testid={`button-${categoryId}-voice-search`}
-              >
-                {isListening ? (
-                  <MicOff className="h-4 w-4 text-red-500 animate-pulse" />
-                ) : (
-                  <Mic className="h-4 w-4 text-white" />
-                )}
-              </Button>
-            )}
+            
+            <div className="absolute right-1 top-1/2 transform -translate-y-1/2 flex items-center gap-0">
+              {categoryId === "food" && (
+                <div 
+                  className="inline-flex rounded-full p-0.5 items-center gap-0"
+                  style={{
+                    backgroundColor: vegFilter === "all" ? "rgba(255, 255, 255, 0.1)" : vegFilter === "veg" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)"
+                  }}
+                >
+                  <button
+                    onClick={() => setVegFilter("all")}
+                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                    data-testid="filter-all"
+                    style={
+                      vegFilter === "all"
+                        ? { backgroundColor: "white", color: "black", lineHeight: "1.2" }
+                        : { color: "#C9A55C", lineHeight: "1.2" }
+                    }
+                  >
+                    All
+                  </button>
+                  <button
+                    onClick={() => setVegFilter("veg")}
+                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                    data-testid="filter-veg"
+                    style={
+                      vegFilter === "veg"
+                        ? { backgroundColor: "#22C55E", color: "white", lineHeight: "1.2" }
+                        : { color: "#C9A55C", lineHeight: "1.2" }
+                    }
+                  >
+                    Veg
+                  </button>
+                  <button
+                    onClick={() => setVegFilter("non-veg")}
+                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                    data-testid="filter-non-veg"
+                    style={
+                      vegFilter === "non-veg"
+                        ? { backgroundColor: "#EF4444", color: "white", lineHeight: "1.2" }
+                        : { color: "#C9A55C", lineHeight: "1.2" }
+                    }
+                  >
+                    Non-Veg
+                  </button>
+                </div>
+              )}
+
+              {voiceSearchSupported && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={isListening ? undefined : startVoiceSearch}
+                  className="h-9 w-9 hover:bg-transparent"
+                  data-testid={`button-${categoryId}-voice-search`}
+                >
+                  {isListening ? (
+                    <MicOff className="h-4 w-4 text-red-500 animate-pulse" />
+                  ) : (
+                    <Mic className="h-4 w-4 text-white" />
+                  )}
+                </Button>
+              )}
+            </div>
           </div>
         )}
 
