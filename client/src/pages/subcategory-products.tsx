@@ -1,10 +1,16 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, Search, Mic, MicOff, Loader2 } from "lucide-react";
+import { ArrowLeft, Search, Mic, MicOff, Loader2, ChevronDown, Filter } from "lucide-react";
 import { useLocation, useParams } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import ProductCard from "@/components/product-card";
 import { getMainCategory } from "@/lib/menu-categories";
 import type { MenuItem } from "@shared/schema";
@@ -194,49 +200,88 @@ export default function SubcategoryProducts() {
               </h1>
 
               {categoryId === "food" && (
-                <div 
-                  className="absolute right-0 inline-flex rounded-full p-0.5 items-center gap-0 scale-90 sm:scale-100"
-                  style={{
-                    backgroundColor: vegFilter === "all" ? "rgba(255, 255, 255, 0.1)" : vegFilter === "veg" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)",
-                    border: `1px solid ${vegFilter === "all" ? "#ffffff" : vegFilter === "veg" ? "#22C55E" : "#EF4444"}`
-                  }}
-                >
-                  <button
-                    onClick={() => setVegFilter("all")}
-                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
-                    data-testid="filter-all"
-                    style={
-                      vegFilter === "all"
-                        ? { backgroundColor: "white", color: "black", lineHeight: "1.2" }
-                        : { color: "#C9A55C", lineHeight: "1.2" }
-                    }
+                <div className="absolute right-0 flex items-center">
+                  {/* Desktop Toggle */}
+                  <div 
+                    className="hidden sm:inline-flex rounded-full p-0.5 items-center gap-0"
+                    style={{
+                      backgroundColor: vegFilter === "all" ? "rgba(255, 255, 255, 0.1)" : vegFilter === "veg" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)",
+                      border: `1px solid ${vegFilter === "all" ? "#ffffff" : vegFilter === "veg" ? "#22C55E" : "#EF4444"}`
+                    }}
                   >
-                    All
-                  </button>
-                  <button
-                    onClick={() => setVegFilter("veg")}
-                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
-                    data-testid="filter-veg"
-                    style={
-                      vegFilter === "veg"
-                        ? { backgroundColor: "#22C55E", color: "white", lineHeight: "1.2" }
-                        : { color: "#C9A55C", lineHeight: "1.2" }
-                    }
-                  >
-                    Veg
-                  </button>
-                  <button
-                    onClick={() => setVegFilter("non-veg")}
-                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
-                    data-testid="filter-non-veg"
-                    style={
-                      vegFilter === "non-veg"
-                        ? { backgroundColor: "#EF4444", color: "white", lineHeight: "1.2" }
-                        : { color: "#C9A55C", lineHeight: "1.2" }
-                    }
-                  >
-                    Non-Veg
-                  </button>
+                    <button
+                      onClick={() => setVegFilter("all")}
+                      className="px-2 py-0.5 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                      data-testid="filter-all"
+                      style={
+                        vegFilter === "all"
+                          ? { backgroundColor: "white", color: "black", lineHeight: "1.2" }
+                          : { color: "#C9A55C", lineHeight: "1.2" }
+                      }
+                    >
+                      All
+                    </button>
+                    <button
+                      onClick={() => setVegFilter("veg")}
+                      className="px-2 py-0.5 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                      data-testid="filter-veg"
+                      style={
+                        vegFilter === "veg"
+                          ? { backgroundColor: "#22C55E", color: "white", lineHeight: "1.2" }
+                          : { color: "#C9A55C", lineHeight: "1.2" }
+                      }
+                    >
+                      Veg
+                    </button>
+                    <button
+                      onClick={() => setVegFilter("non-veg")}
+                      className="px-2 py-0.5 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                      data-testid="filter-non-veg"
+                      style={
+                        vegFilter === "non-veg"
+                          ? { backgroundColor: "#EF4444", color: "white", lineHeight: "1.2" }
+                          : { color: "#C9A55C", lineHeight: "1.2" }
+                      }
+                    >
+                      Non-Veg
+                    </button>
+                  </div>
+
+                  {/* Mobile Dropdown */}
+                  <div className="sm:hidden">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="h-7 px-2 rounded-full border-[#C9A55C] text-[#C9A55C] hover:bg-[#C9A55C]/10 bg-transparent text-[10px]"
+                        >
+                          <span className="capitalize">{vegFilter === "all" ? "Filter" : vegFilter}</span>
+                          <ChevronDown className="ml-1 h-3 w-3" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="bg-[#1A1A1A] border-[#C9A55C] text-[#C9A55C]">
+                        <DropdownMenuItem 
+                          onClick={() => setVegFilter("all")}
+                          className="focus:bg-[#C9A55C]/10 focus:text-[#C9A55C] text-[11px]"
+                        >
+                          All
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setVegFilter("veg")}
+                          className="focus:bg-[#22C55E]/10 focus:text-[#22C55E] text-[11px]"
+                        >
+                          Veg
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setVegFilter("non-veg")}
+                          className="focus:bg-[#EF4444]/10 focus:text-[#EF4444] text-[11px]"
+                        >
+                          Non-Veg
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
                 </div>
               )}
             </div>
