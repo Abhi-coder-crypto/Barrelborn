@@ -180,9 +180,9 @@ export default function SubcategoryProducts() {
               <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
 
-            <div className="flex-1 flex items-center justify-center gap-3">
+            <div className="flex-1 flex items-center justify-center relative">
               <h1
-                className="font-bold"
+                className="font-bold text-center"
                 style={{
                   fontSize: "clamp(16px, 4vw, 24px)",
                   color: "#C9A55C",
@@ -195,7 +195,7 @@ export default function SubcategoryProducts() {
 
               {categoryId === "food" && (
                 <div 
-                  className="inline-flex rounded-full p-0.5 items-center gap-0 scale-90 sm:scale-100"
+                  className="absolute right-0 inline-flex rounded-full p-0.5 items-center gap-0 scale-90 sm:scale-100"
                   style={{
                     backgroundColor: vegFilter === "all" ? "rgba(255, 255, 255, 0.1)" : vegFilter === "veg" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)",
                     border: `1px solid ${vegFilter === "all" ? "#ffffff" : vegFilter === "veg" ? "#22C55E" : "#EF4444"}`
