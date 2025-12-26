@@ -19,6 +19,18 @@ export default function Welcome() {
     }
   }, []);
 
+  const handleReviewClick = useCallback(() => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // On mobile, use Google Maps which has better review support and shows review button prominently
+    // On desktop, use the search URL that opens the review box modal
+    const reviewUrl = isMobile 
+      ? "https://www.google.com/maps/search/Barrelborn+Dine+Draft+Thane/@19.2183,72.9781,13z"
+      : "https://www.google.com/search?q=barrelborn+%7C+dine+and+draft+%7C+thane&sca_esv=579435e9b1f4aa6c&sxsrf=AE3TifMKJiOcA_0foKemaeqGQQg9dgk-cQ%3A1766738800477&ei=cEtOaYbrHLLl2roP_OrSUA&oq=barrel&gs_lp=Egxnd3Mtd2l6LXNlcnAiBmJhcnJlbCoCCAAyBBAjGCcyBBAjGCcyChAjGIAEGCcYigUyCxAAGIAEGJECGIoFMhAQABiABBixAxhDGIMBGIoFMgsQABiABBiRAhiKBTIQEAAYgAQYsQMYQxiDARiKBTIQEC4YgAQY0QMYQxjHARiKBTIIEAAYgAQYsQMyChAAGIAEGBQYhwJIxxtQxwNYwg5wAngAkAEAmAHPAaAB2gmqAQUwLjYuMbgBAcgBAPgBAZgCCKAC_QioAhDCAgoQABiwAxjWBBhHwgIHECMYJxjqAsICDRAuGMcBGCcY6gIYrwHCAhcQABiABBiRAhi0AhjnBhiKBRjqAtgBAcICCxAAGIAEGLEDGIMBwgIFEAAYgATCAg4QLhiABBixAxjRAxjHAcICERAAGIAEGLEDGIMBGIoFGI0GwgIFEC4YgATCAgoQABiABBhDGIoFwgIOEAAYgAQYkQIYsQMYigXCAhcQLhiABBiRAhixAxjRAxjHARjJAxiKBcICDRAuGIAEGLEDGEMYigXCAhAQLhiABBixAxhDGIMBGIoFwgIQEAAYgAQYsQMYQxjJAxiKBZgDCfEFwClWDApzulmIBgGQBgi6BgYIARABGAGSBwUyLjUuMaAHtl-yBwUwLjUuMbgH6QjCBwUyLTcuMcgHKYAIAA&sclient=gws-wiz-serp#lrd=0x3be7b9b24c556745:0x394d83a5b37880b2,3,,,,";
+    
+    window.open(reviewUrl, "_blank", "noopener,noreferrer");
+  }, []);
+
   return (
     <div 
       className="min-h-screen w-full overflow-auto" 
@@ -85,7 +97,7 @@ export default function Welcome() {
           </p>
           <div
             className="flex justify-center cursor-pointer gap-1"
-            onClick={() => window.open("https://www.google.com/search?q=barrelborn+%7C+dine+and+draft+%7C+thane&sca_esv=579435e9b1f4aa6c&sxsrf=AE3TifMKJiOcA_0foKemaeqGQQg9dgk-cQ%3A1766738800477&ei=cEtOaYbrHLLl2roP_OrSUA&oq=barrel&gs_lp=Egxnd3Mtd2l6LXNlcnAiBmJhcnJlbCoCCAAyBBAjGCcyBBAjGCcyChAjGIAEGCcYigUyCxAAGIAEGJECGIoFMhAQABiABBixAxhDGIMBGIoFMgsQABiABBiRAhiKBTIQEAAYgAQYsQMYQxiDARiKBTIQEC4YgAQY0QMYQxjHARiKBTIIEAAYgAQYsQMyChAAGIAEGBQYhwJIxxtQxwNYwg5wAngAkAEAmAHPAaAB2gmqAQUwLjYuMbgBAcgBAPgBAZgCCKAC_QioAhDCAgoQABiwAxjWBBhHwgIHECMYJxjqAsICDRAuGMcBGCcY6gIYrwHCAhcQABiABBiRAhi0AhjnBhiKBRjqAtgBAcICCxAAGIAEGLEDGIMBwgIFEAAYgATCAg4QLhiABBixAxjRAxjHAcICERAAGIAEGLEDGIMBGIoFGI0GwgIFEC4YgATCAgoQABiABBhDGIoFwgIOEAAYgAQYkQIYsQMYigXCAhcQLhiABBiRAhixAxjRAxjHARjJAxiKBcICDRAuGIAEGLEDGEMYigXCAhAQLhiABBixAxhDGIMBGIoFwgIQEAAYgAQYsQMYQxjJAxiKBZgDCfEFwClWDApzulmIBgGQBgi6BgYIARABGAGSBwUyLjUuMaAHtl-yBwUwLjUuMbgH6QjCBwUyLTcuMcgHKYAIAA&sclient=gws-wiz-serp#lrd=0x3be7b9b24c556745:0x394d83a5b37880b2,3,,,,", "_blank")}
+            onClick={handleReviewClick}
           >
             {[1, 2, 3, 4, 5].map((star) => (
               <Star key={star} className="w-8 h-8" style={{ color: '#B8986A', fill: '#B8986A' }} />
