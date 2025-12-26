@@ -180,17 +180,66 @@ export default function SubcategoryProducts() {
               <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
 
-            <h1
-              className="font-bold text-center flex-1"
-              style={{
-                fontSize: "clamp(16px, 4vw, 24px)",
-                color: "#C9A55C",
-                fontFamily: "'Cormorant Garamond', serif",
-                letterSpacing: "2px",
-              }}
-            >
-              {currentSubcategory.displayLabel.toUpperCase()}
-            </h1>
+            <div className="flex-1 flex items-center justify-center gap-3">
+              <h1
+                className="font-bold"
+                style={{
+                  fontSize: "clamp(16px, 4vw, 24px)",
+                  color: "#C9A55C",
+                  fontFamily: "'Cormorant Garamond', serif",
+                  letterSpacing: "2px",
+                }}
+              >
+                {currentSubcategory.displayLabel.toUpperCase()}
+              </h1>
+
+              {categoryId === "food" && (
+                <div 
+                  className="inline-flex rounded-full p-0.5 items-center gap-0 scale-90 sm:scale-100"
+                  style={{
+                    backgroundColor: vegFilter === "all" ? "rgba(255, 255, 255, 0.1)" : vegFilter === "veg" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)",
+                    border: `1px solid ${vegFilter === "all" ? "#ffffff" : vegFilter === "veg" ? "#22C55E" : "#EF4444"}`
+                  }}
+                >
+                  <button
+                    onClick={() => setVegFilter("all")}
+                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                    data-testid="filter-all"
+                    style={
+                      vegFilter === "all"
+                        ? { backgroundColor: "white", color: "black", lineHeight: "1.2" }
+                        : { color: "#C9A55C", lineHeight: "1.2" }
+                    }
+                  >
+                    All
+                  </button>
+                  <button
+                    onClick={() => setVegFilter("veg")}
+                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                    data-testid="filter-veg"
+                    style={
+                      vegFilter === "veg"
+                        ? { backgroundColor: "#22C55E", color: "white", lineHeight: "1.2" }
+                        : { color: "#C9A55C", lineHeight: "1.2" }
+                    }
+                  >
+                    Veg
+                  </button>
+                  <button
+                    onClick={() => setVegFilter("non-veg")}
+                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                    data-testid="filter-non-veg"
+                    style={
+                      vegFilter === "non-veg"
+                        ? { backgroundColor: "#EF4444", color: "white", lineHeight: "1.2" }
+                        : { color: "#C9A55C", lineHeight: "1.2" }
+                    }
+                  >
+                    Non-Veg
+                  </button>
+                </div>
+              )}
+            </div>
 
             <div className="w-9" />
           </div>
@@ -198,53 +247,6 @@ export default function SubcategoryProducts() {
       </header>
 
       <div className="container mx-auto px-3 sm:px-4 py-4">
-        {categoryId === "food" && (
-          <div 
-            className="mb-4 inline-flex rounded-full p-0.5 items-center gap-0"
-            style={{
-              backgroundColor: vegFilter === "all" ? "rgba(255, 255, 255, 0.1)" : vegFilter === "veg" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)",
-              border: `1px solid ${vegFilter === "all" ? "#ffffff" : vegFilter === "veg" ? "#22C55E" : "#EF4444"}`
-            }}
-          >
-            <button
-              onClick={() => setVegFilter("all")}
-              className="px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
-              data-testid="filter-all"
-              style={
-                vegFilter === "all"
-                  ? { backgroundColor: "white", color: "black", fontSize: "12px", lineHeight: "1.2" }
-                  : { color: "#C9A55C", fontSize: "12px", lineHeight: "1.2" }
-              }
-            >
-              All
-            </button>
-            <button
-              onClick={() => setVegFilter("veg")}
-              className="px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
-              data-testid="filter-veg"
-              style={
-                vegFilter === "veg"
-                  ? { backgroundColor: "#22C55E", color: "white", fontSize: "12px", lineHeight: "1.2" }
-                  : { color: "#C9A55C", fontSize: "12px", lineHeight: "1.2" }
-              }
-            >
-              Veg
-            </button>
-            <button
-              onClick={() => setVegFilter("non-veg")}
-              className="px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
-              data-testid="filter-non-veg"
-              style={
-                vegFilter === "non-veg"
-                  ? { backgroundColor: "#EF4444", color: "white", fontSize: "12px", lineHeight: "1.2" }
-                  : { color: "#C9A55C", fontSize: "12px", lineHeight: "1.2" }
-              }
-            >
-              Non-Veg
-            </button>
-          </div>
-        )}
-
         <div className="relative mb-6">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white" />
           <Input
