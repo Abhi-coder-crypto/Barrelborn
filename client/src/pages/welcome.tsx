@@ -22,10 +22,10 @@ export default function Welcome() {
   const handleReviewClick = useCallback(() => {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    // On mobile, use Google Maps which has better review support and shows review button prominently
+    // On mobile, use the direct reviews search URL
     // On desktop, use the search URL that opens the review box modal
     const reviewUrl = isMobile 
-      ? "https://www.google.com/maps/search/Barrelborn+Dine+Draft+Thane/@19.2183,72.9781,13z"
+      ? "https://www.google.com/search?sca_esv=579435e9b1f4aa6c&sxsrf=AE3TifO50MVJshN0gwbaDgq-X0j3uwlj5Q:1766741079150&q=barrelborn+%7C+dine+and+draft+%7C+thane+reviews&uds=AOm0WdHv8vC2-lx9BAKuP6KMCsmN4ax5ipzZo5mTWoC027zHKwygrheywQvQWo5nabYtE3awGjTOfLcv47n8JXgAU_vspWoHIdrY_gCn48b00caS5xPTguRMfxz1t2k0GICz0dfCNTbKCvsfI-QouUmfqrhQ789Gk-m4zC7Lc_XRvfb9MeMxkvdwu5wz8DJwMC3S8-79GUjB6Togmu5iRJZf5gzXQSCHA9cVZCUep9cI7tWTjdP8aX2rZFCn-1rPdhxxXhbBJnXOPwRS2b4HRbMQ3fDOtdqv26t0el4kWrEIyGj5I9VRoU8g7lVsbcmeKHuUHbFS666DKu7PVqFc_2p21ybaz1vjFa2T-fkJqsxya303BLUgCaCB8hMrIYIc_fzbIPih5JxypW652OIuC1IAhlVJIytELdtwCn1ducwKymjtJe9df46kM6vy74Br2uByTtKHg4WrztuYnm7eAUlhLg_Js_coyXFuGPwpBPCEj7daG1iXOGA&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E9moAMXsS0ppftIa0AAstM4Kr0Fg3SDnjKoe8Exi64ssFBObqy6D1rku7YyUuVozeN2jiji9DWq2wiCxYBSFS6Kv53kzE6sZzRmH4EYSlkax2vvh_vNaBexWa-FdPkWwc5EF3NY%3D&sa=X&ved=2ahUKEwif-bqz99qRAxWGyDgGHdTeB10Qk8gLegQIGRAB&ictx=1&stq=1&cs=1&lei=V1ROad_xCIaR4-EP1L2f6AU#ebo=4"
       : "https://www.google.com/search?q=barrelborn+%7C+dine+and+draft+%7C+thane&sca_esv=579435e9b1f4aa6c&sxsrf=AE3TifMKJiOcA_0foKemaeqGQQg9dgk-cQ%3A1766738800477&ei=cEtOaYbrHLLl2roP_OrSUA&oq=barrel&gs_lp=Egxnd3Mtd2l6LXNlcnAiBmJhcnJlbCoCCAAyBBAjGCcyBBAjGCcyChAjGIAEGCcYigUyCxAAGIAEGJECGIoFMhAQABiABBixAxhDGIMBGIoFMgsQABiABBiRAhiKBTIQEAAYgAQYsQMYQxiDARiKBTIQEC4YgAQY0QMYQxjHARiKBTIIEAAYgAQYsQMyChAAGIAEGBQYhwJIxxtQxwNYwg5wAngAkAEAmAHPAaAB2gmqAQUwLjYuMbgBAcgBAPgBAZgCCKAC_QioAhDCAgoQABiwAxjWBBhHwgIHECMYJxjqAsICDRAuGMcBGCcY6gIYrwHCAhcQABiABBiRAhi0AhjnBhiKBRjqAtgBAcICCxAAGIAEGLEDGIMBwgIFEAAYgATCAg4QLhiABBixAxjRAxjHAcICERAAGIAEGLEDGIMBGIoFGI0GwgIFEC4YgATCAgoQABiABBhDGIoFwgIOEAAYgAQYkQIYsQMYigXCAhcQLhiABBiRAhixAxjRAxjHARjJAxiKBcICDRAuGIAEGLEDGEMYigXCAhAQLhiABBixAxhDGIMBGIoFwgIQEAAYgAQYsQMYQxjJAxiKBZgDCfEFwClWDApzulmIBgGQBgi6BgYIARABGAGSBwUyLjUuMaAHtl-yBwUwLjUuMbgH6QjCBwUyLTcuMcgHKYAIAA&sclient=gws-wiz-serp#lrd=0x3be7b9b24c556745:0x394d83a5b37880b2,3,,,,";
     
     window.open(reviewUrl, "_blank", "noopener,noreferrer");
