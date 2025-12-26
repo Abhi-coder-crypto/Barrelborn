@@ -200,7 +200,7 @@ export default function SubcategoryProducts() {
               </h1>
 
               {categoryId === "food" && (
-                <div className="absolute right-0 flex items-center">
+                <div className="absolute -right-2 flex items-center">
                   {/* Desktop Toggle */}
                   <div 
                     className="hidden sm:inline-flex rounded-full p-0.5 items-center gap-0"
@@ -256,7 +256,7 @@ export default function SubcategoryProducts() {
                           size="sm" 
                           className="h-7 px-2 rounded-full border-[#C9A55C] text-[#C9A55C] hover:bg-[#C9A55C]/10 bg-transparent text-[10px]"
                         >
-                          <span className="capitalize">{vegFilter === "all" ? "Filter" : vegFilter}</span>
+                          <span className="capitalize">{vegFilter}</span>
                           <ChevronDown className="ml-1 h-3 w-3" />
                         </Button>
                       </DropdownMenuTrigger>
