@@ -213,7 +213,7 @@ export default function SubcategoryProducts() {
             placeholder={`Search ${currentSubcategory.displayLabel.toLowerCase()}...`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-24 h-11 rounded-full border-2 text-white placeholder:text-white/70 focus-visible:ring-2 focus-visible:ring-[#C9A55C]/50"
+            className="pl-10 pr-32 sm:pr-40 h-11 rounded-full border-2 text-white placeholder:text-white/70 focus-visible:ring-2 focus-visible:ring-[#C9A55C]/50"
             style={{ 
               borderColor: '#C9A55C', 
               backgroundColor: 'transparent'
@@ -223,16 +223,15 @@ export default function SubcategoryProducts() {
             <div className="absolute right-1 top-1/2 transform -translate-y-1/2 flex items-center gap-0">
             {categoryId === "food" && (
               <div className="flex items-center">
-                {/* Desktop Toggle (Hidden in search bar for desktop, keeping existing logic for consistency) */}
                 <div 
-                  className="hidden sm:inline-flex rounded-full p-0.5 items-center gap-0"
+                  className="inline-flex rounded-full p-0.5 items-center gap-0"
                   style={{
                     backgroundColor: vegFilter === "all" ? "rgba(255, 255, 255, 0.1)" : vegFilter === "veg" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)"
                   }}
                 >
                   <button
                     onClick={() => setVegFilter("all")}
-                    className="px-2 py-0.5 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
                     data-testid="filter-all"
                     style={
                       vegFilter === "all"
@@ -244,7 +243,7 @@ export default function SubcategoryProducts() {
                   </button>
                   <button
                     onClick={() => setVegFilter("veg")}
-                    className="px-2 py-0.5 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
                     data-testid="filter-veg"
                     style={
                       vegFilter === "veg"
@@ -256,7 +255,7 @@ export default function SubcategoryProducts() {
                   </button>
                   <button
                     onClick={() => setVegFilter("non-veg")}
-                    className="px-2 py-0.5 text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
+                    className="px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full transition-all duration-200 flex-shrink-0"
                     data-testid="filter-non-veg"
                     style={
                       vegFilter === "non-veg"
@@ -266,42 +265,6 @@ export default function SubcategoryProducts() {
                   >
                     Non-Veg
                   </button>
-                </div>
-
-                {/* Mobile Dropdown (Now inside search bar) */}
-                <div className="sm:hidden">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        className="h-9 px-2 hover:bg-transparent text-[#C9A55C] hover:text-white text-[10px] flex items-center gap-1"
-                      >
-                        <span className="capitalize">{vegFilter}</span>
-                        <ChevronDown className="h-3 w-3" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="bg-[#1A1A1A] border-[#C9A55C] text-[#C9A55C]">
-                      <DropdownMenuItem 
-                        onClick={() => setVegFilter("all")}
-                        className="focus:bg-[#C9A55C]/10 focus:text-[#C9A55C] text-[11px]"
-                      >
-                        All
-                      </DropdownMenuItem>
-                      <DropdownMenuItem 
-                        onClick={() => setVegFilter("veg")}
-                        className="focus:bg-[#22C55E]/10 focus:text-[#22C55E] text-[11px]"
-                      >
-                        Veg
-                      </DropdownMenuItem>
-                      <DropdownMenuItem 
-                        onClick={() => setVegFilter("non-veg")}
-                        className="focus:bg-[#EF4444]/10 focus:text-[#EF4444] text-[11px]"
-                      >
-                        Non-Veg
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
                 </div>
               </div>
             )}
