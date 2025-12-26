@@ -59,7 +59,9 @@ export default function ProductCard({ item }: ProductCardProps) {
             lineHeight: "1.5"
           }}
         >
-          {typeof item.price === "string" && item.price.includes("|") ? item.price : `₹${item.price}`}
+          {typeof item.price === "string" && item.price.includes("|") 
+            ? item.price.split("|").map(p => `₹${p.trim()}`).join(" | ")
+            : `₹${item.price}`}
         </span>
       </div>
     </div>

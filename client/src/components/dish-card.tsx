@@ -50,7 +50,9 @@ export default function DishCard({ item }: DishCardProps) {
                 className="font-serif font-bold text-sm md:text-base"
                 style={{ color: 'var(--mings-orange)' }}
               >
-                {typeof item.price === "string" && item.price.includes("|") ? item.price : `₹${item.price}`}
+                {typeof item.price === "string" && item.price.includes("|") 
+                  ? item.price.split("|").map(p => `₹${p.trim()}`).join(" | ")
+                  : `₹${item.price}`}
               </span>
             </div>
           </div>
