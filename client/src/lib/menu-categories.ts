@@ -82,6 +82,18 @@ export const mainCategories: MainCategory[] = [
     subcategories: foodSubcategories,
   },
   {
+    id: "crafted-beer",
+    displayLabel: "CRAFTED BEER",
+    description: "Premium brewed beers",
+    subcategories: [], // Add subcategories if needed later
+  },
+  {
+    id: "cocktails",
+    displayLabel: "COCKTAILS",
+    description: "Expertly mixed drinks",
+    subcategories: [], // Add subcategories if needed later
+  },
+  {
     id: "bar",
     displayLabel: "BAR",
     description: "Premium spirits and wines",

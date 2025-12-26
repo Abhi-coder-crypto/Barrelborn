@@ -20,6 +20,8 @@ import premiumFoodImg from "@assets/image_1765866040643.png";
 import premiumBarImg from "@assets/stock_images/premium_whisky_cockt_68b3295e.jpg";
 import premiumDessertsImg from "@assets/image_1765866710467.png";
 import premiumMocktailsImg from "@assets/stock_images/premium_colorful_moc_1a15dee9.jpg";
+import cocktailsImg from "@assets/COCKTAILS_1766750491357.jpg";
+import craftedBeerImg from "@assets/CRAFTED_BEER_1766750491358.jpg";
 import logoImg from "@assets/Untitled_design_(20)_1765720426678.png";
 
 const promotionalImages = [
@@ -32,6 +34,8 @@ const promotionalImages = [
 
 const categoryImages: Record<string, string> = {
   food: premiumFoodImg,
+  "crafted-beer": craftedBeerImg,
+  cocktails: cocktailsImg,
   bar: premiumBarImg,
   desserts: premiumDessertsImg,
   mocktails: premiumMocktailsImg,
@@ -143,7 +147,7 @@ export default function MenuLanding() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {mainCategories.map((category, index) => (
             <motion.button
               key={category.id}
@@ -153,8 +157,8 @@ export default function MenuLanding() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => handleCategoryClick(category.id)}
-              className="relative rounded-xl overflow-hidden group"
-              style={{ aspectRatio: "1/1.3" }}
+              className="relative rounded-lg overflow-hidden group"
+              style={{ aspectRatio: "1/1.1" }}
               data-testid={`tile-${category.id}`}
             >
               <img
@@ -162,15 +166,16 @@ export default function MenuLanding() {
                 alt={category.displayLabel}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 flex flex-col items-center justify-start p-4 pt-8">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 flex flex-col items-center justify-end p-2 pb-4">
                 <h3
-                  className="text-2xl sm:text-3xl md:text-4xl font-black tracking-wider uppercase"
+                  className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider uppercase text-center"
                   style={{
                     fontFamily: "'Playfair Display', serif",
                     color: "#FFFFFF",
                     textShadow:
-                      "0 4px 12px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.9)",
-                    letterSpacing: "3px",
+                      "0 2px 8px rgba(0,0,0,0.8)",
+                    letterSpacing: "1px",
                   }}
                 >
                   {category.displayLabel}
