@@ -347,7 +347,7 @@ export default function CategorySelection() {
                     <Clock className="h-5 w-5 text-gray-600" />
                     <div>
                       <p className="font-semibold text-gray-800" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                        11:00 AM - 11:00 PM
+                        11:00 AM - 11:30 PM
                       </p>
                       <p className="text-sm text-gray-600" style={{ fontFamily: "'Lato', sans-serif" }}>
                         Open all days
